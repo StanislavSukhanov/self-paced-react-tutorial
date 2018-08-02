@@ -33,6 +33,8 @@ class Square extends React.Component {
   */
   
   class Board extends React.Component {
+    // the mission of this component is to render Square functonal element
+
     
     renderSquare(i) {
       return (
@@ -86,14 +88,13 @@ class Square extends React.Component {
       })
     }
 
-
     handleClick(i){
       const history = this.state.history.slice(0, this.state.stepNumber + 1)
       const current = history[history.length - 1];
       const squares = current.squares.slice(); 
 
       if (calculateWinner(squares) || squares[i]){
-        return;
+        return; 
       } 
 
       squares[i] = this.state.xIsNext? "X" : "O"
