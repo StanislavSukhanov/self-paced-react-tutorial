@@ -127,19 +127,22 @@ class Square extends React.Component {
       const history = this.state.history;
       const current = history[this.state.stepNumber];
       const winner = calculateWinner(current.squares);
-      // const gameMovePosition 
-
+      const className = 'active-button' 
+      
       const moves = history.map((step, move) => {
         const gameMove = step.move;
         const desc = move ? 
           "go to move # " + move + `move: col(${gameMove[0]}) row(${gameMove[1]})` :
           "Go to game start"; 
-        
-        
-
         return (
           <li key={move}>
-            <button onClick={() => this.jumpTo(move)}>
+            <button 
+              onClick={() => this.jumpTo(move)}
+              /**
+               Here I've added 2 event handlers to toggle a class for an active button
+               */
+              onMouseEnter={(e) => e.currentTarget.className=className}
+              onMouseLeave={(e) => e.currentTarget.className=""}>
               {desc}
             </button>
           </li>
