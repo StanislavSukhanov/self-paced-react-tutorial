@@ -130,16 +130,17 @@ class Square extends React.Component {
       // const gameMovePosition 
 
       const moves = history.map((step, move) => {
+        const gameMove = step.move;
         const desc = move ? 
-          "go to move # " + move :
+          "go to move # " + move + `move: col(${gameMove[0]}) row(${gameMove[1]})` :
           "Go to game start"; 
         
-        const gameMove = step.move;
+        
 
         return (
           <li key={move}>
             <button onClick={() => this.jumpTo(move)}>
-              {`${desc} move: col(${gameMove[0]}) row(${gameMove[1]})`}
+              {desc}
             </button>
           </li>
         )
