@@ -44,10 +44,27 @@ class Square extends React.Component {
         />
       );
     }
+
+    
+    
   
     render() {
+      let rows = []; 
+      let count = 0; 
+
+      for(let i = 0; i < 3; i++){
+        let children = []
+        for (let b = 0; b < 3; b++){
+          children.push(this.renderSquare(count))
+          count++
+        }
+        rows.push(<div className="board-row"> 
+                    {children} 
+                  </div>)
+      }
       return (
-        
+        <div>{rows}</div>
+        /* *
         <div>
           <div className="board-row">
             {this.renderSquare(0)}
@@ -65,6 +82,7 @@ class Square extends React.Component {
             {this.renderSquare(8)}
           </div>
         </div>
+        */
       );
     }
   }
