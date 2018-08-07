@@ -17,6 +17,15 @@ function Square(props){
 
     )
 }
+function Toggle(props){
+  return (
+    <button 
+      className="toggle-button"
+      onClick={props.onClick}
+      >Toggle</button>
+    
+  )
+}
 /*
 class Square extends React.Component {
     render() {
@@ -45,22 +54,17 @@ class Square extends React.Component {
       );
     }
 
-    
-    
-  
     render() {
+      // refactored to draw a table using 2 "for" loops 
       let rows = []; 
       let count = 0; 
-
       for(let i = 0; i < 3; i++){
         let children = []
         for (let b = 0; b < 3; b++){
           children.push(this.renderSquare(count))
           count++
         }
-        rows.push(<div className="board-row"> 
-                    {children} 
-                  </div>)
+        rows.push(<div className="board-row"> {children}</div>)
       }
       return (
         <div>{rows}</div>
@@ -98,6 +102,7 @@ class Square extends React.Component {
         }],
         xIsNext: true, 
         stepNumber: 0, 
+        isReversed: false, // added a piece to track wheather histotry is reversed, or not; 
       }
     } 
 
@@ -106,6 +111,14 @@ class Square extends React.Component {
         stepNumber: step, 
         xIsNext: (step % 2) === 0, 
       })
+    }
+
+    handleToggleButton(){
+      this.setState({
+        isReversed: !this.state.isReversed,
+      })
+      
+
     }
 
     handleClick(i){
@@ -143,7 +156,10 @@ class Square extends React.Component {
 
     render() {
       const history = this.state.history;
-      const current = history[this.state.stepNumber];
+      const current = !this.state.isReversed ? 
+        history[this.state.stepNumber] :
+        history[history.length - this.state.stepNumber] // continue from here ********* 
+
       const winner = calculateWinner(current.squares);
       const className = 'active-button' 
       
@@ -184,6 +200,7 @@ class Square extends React.Component {
           </div>
           <div className="game-info">
             <div>{status}</div>
+            <Toggle onClick={() => this.handleToggleButton()} />
             <ol>{moves}</ol>
           </div>
         </div>
