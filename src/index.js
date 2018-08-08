@@ -17,6 +17,7 @@ function Square(props){
 
     )
 }
+// this is my toggle button task #4
 function Toggle(props){
   return (
     <button 
@@ -64,7 +65,7 @@ class Square extends React.Component {
           children.push(this.renderSquare(count))
           count++
         }
-        rows.push(<div className="board-row"> {children}</div>)
+        rows.push(<div className="board-row"> {children} </div>)
       }
       return (
         <div>{rows}</div>
@@ -114,6 +115,8 @@ class Square extends React.Component {
     }
 
     handleToggleButton(){
+      // here is my handle method for 
+      // clicking on "toggle button" task 4
       this.setState({
         isReversed: !this.state.isReversed,
       })
@@ -156,11 +159,8 @@ class Square extends React.Component {
 
     render() {
       const history = this.state.history;
-      const current = !this.state.isReversed ? 
-        history[this.state.stepNumber] :
-        history[history.length - this.state.stepNumber] // continue from here ********* 
-
-      const winner = calculateWinner(current.squares);
+      const current = history[this.state.stepNumber]
+      const winner = calculateWinner(current.squares)
       const className = 'active-button' 
       
       const moves = history.map((step, move) => {
@@ -201,7 +201,12 @@ class Square extends React.Component {
           <div className="game-info">
             <div>{status}</div>
             <Toggle onClick={() => this.handleToggleButton()} />
-            <ol>{moves}</ol>
+            {/**
+            Here i've added ternary operator which render eitrher 
+            unchanged array of  buttons or reversed array of buttons 
+            depending on this.state.isReversed value
+            */}
+            <ol>{this.state.isReversed? moves.reverse() : moves}</ol>
           </div>
         </div>
       );
