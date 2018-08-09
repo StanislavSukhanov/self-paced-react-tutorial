@@ -52,3 +52,7 @@ body {
   .active-button {
     font-weight: bold;
   }
+
+  .win-combination {
+    color: red;
+  }

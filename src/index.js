@@ -185,7 +185,20 @@ class Square extends React.Component {
       if (winner){
         status = "Winner: "+ winner.winner;
         const winCombination = document.getElementsByClassName('square');
+        const winElementStyle = "red"
+      
+        const [a, b, c] = winner.lines
+      /** 
+        winCombination[a].className = winElementStyle
+        winCombination[b].className = winElementStyle
+        winCombination[c].className = winElementStyle
+      */
+        winCombination[a].style.color = winElementStyle
+        winCombination[b].style.color = winElementStyle
+        winCombination[c].style.color = winElementStyle
         console.log(winCombination);
+        console.log(winCombination[0]);
+        
         // chekc some hints here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/from
         // and here: https://stackoverflow.com/questions/24266313/using-foreach-on-an-array-from-getelementsbyclassname-results-in-typeerror-und
       } else {
